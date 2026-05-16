@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI定制头像 - 节日专属</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a0f; color: #fff; min-height: 100vh; }
+        .header { text-align: center; padding: 40px 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .header h1 { font-size: 28px; margin-bottom: 8px; }
+        .header p { opacity: 0.9; font-size: 14px; }
+        .price-banner { background: linear-gradient(90deg, #f093fb 0%, #f5576c 100%); text-align: center; padding: 15px; font-size: 20px; font-weight: bold; }
+        .gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 16px; max-width: 500px; margin: 0 auto; }
+        .gallery img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 12px; cursor: pointer; transition: transform 0.2s; }
+        .gallery img:hover { transform: scale(1.03); }
+        .section { padding: 24px 16px; max-width: 500px; margin: 0 auto; }
+        .section h2 { font-size: 18px; margin-bottom: 12px; color: #f093fb; }
+        .service-list { list-style: none; }
+        .service-list li { padding: 12px 0; border-bottom: 1px solid #333; display: flex; justify-content: space-between; }
+        .service-list li:last-child { border: none; }
+        .service-name { color: #ddd; }
+        .service-price { color: #f5576c; font-weight: bold; }
+        .order-btn { display: block; width: calc(100% - 32px); margin: 20px auto; padding: 16px; background: linear-gradient(90deg, #f093fb 0%, #f5576c 100%); border: none; border-radius: 12px; color: #fff; font-size: 18px; font-weight: bold; cursor: pointer; text-align: center; text-decoration: none; }
+        .qr-section { text-align: center; padding: 30px; }
+        .qr-section img { width: 200px; border-radius: 12px; margin-bottom: 12px; }
+        .qr-section p { color: #888; font-size: 13px; }
+        .steps { background: #16161f; border-radius: 12px; padding: 20px; margin: 16px 0; }
+        .step { display: flex; align-items: center; margin: 12px 0; }
+        .step-num { width: 28px; height: 28px; background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 14px; margin-right: 12px; flex-shrink: 0; }
+        .step-text { color: #ccc; font-size: 14px; }
+        .footer { text-align: center; padding: 30px; color: #555; font-size: 12px; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🎨 AI定制头像</h1>
+        <p>端午节、儿童节专属头像 · 私人定制</p>
+    </div>
+    
+    <div class="price-banner">
+        特价 ¥19.9 元/个 · 当天交付
+    </div>
+    
+    <div class="gallery">
+        <img src="images/cover_1.png" onclick="preview(this)" alt="端午节头像1">
+        <img src="images/cover_2.png" onclick="preview(this)" alt="端午节头像2">
+        <img src="images/cover_3.png" onclick="preview(this)" alt="儿童节头像1">
+        <img src="images/cover_4.png" onclick="preview(this)" alt="儿童节头像2">
+        <img src="images/cover_5.png" onclick="preview(this)" alt="端午节头像3">
+        <img src="images/cover_6.png" onclick="preview(this)" alt="儿童节头像3">
+    </div>
+    
+    <div class="section">
+        <h2>📋 服务内容</h2>
+        <ul class="service-list">
+            <li><span class="service-name">节日主题头像</span><span class="service-price">¥19.9</span></li>
+            <li><span class="service-name">情侣/双人头像</span><span class="service-price">¥29.9</span></li>
+            <li><span class="service-name">全家福卡通头像</span><span class="service-price">¥39.9</span></li>
+            <li><span class="service-name">宠物卡通头像</span><span class="service-price">¥29.9</span></li>
+        </ul>
+    </div>
+    
+    <div class="section">
+        <h2>📝 定制流程</h2>
+        <div class="steps">
+            <div class="step"><div class="step-num">1</div><div class="step-text">扫码付款 ¥19.9</div></div>
+            <div class="step"><div class="step-num">2</div><div class="step-text">加微信备注「头像定制」</div></div>
+            <div class="step"><div class="step-num">3</div><div class="step-text">发送需求（节日/风格/人物描述）</div></div>
+            <div class="step"><div class="step-num">4</div><div class="step-text">AI生成 · 当天交付</div></div>
+        </div>
+    </div>
+    
+    <div class="qr-section">
+        <img src="../images/wechat_payment_qrcode.jpg" alt="微信付款码">
+        <p>长按识别二维码付款</p>
+        <p style="margin-top:8px;color:#f5576c;">付款后联系微信: dddd9527</p>
+    </div>
+    
+    <div class="footer">
+        AI生成 · 当天交付 · 满意为止
+    </div>
+    
+    <script>
+    function preview(img) {
+        window.open(img.src, '_blank');
+    }
+    </script>
+</body>
+</html>
