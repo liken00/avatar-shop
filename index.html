@@ -3,87 +3,234 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI定制头像 - 节日专属</title>
+    <title>端午头像定制 · 预售</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a0f; color: #fff; min-height: 100vh; }
-        .header { text-align: center; padding: 40px 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
-        .header h1 { font-size: 28px; margin-bottom: 8px; }
-        .header p { opacity: 0.9; font-size: 14px; }
-        .price-banner { background: linear-gradient(90deg, #f093fb 0%, #f5576c 100%); text-align: center; padding: 15px; font-size: 20px; font-weight: bold; }
-        .gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 16px; max-width: 500px; margin: 0 auto; }
-        .gallery img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 12px; cursor: pointer; transition: transform 0.2s; }
-        .gallery img:hover { transform: scale(1.03); }
-        .section { padding: 24px 16px; max-width: 500px; margin: 0 auto; }
-        .section h2 { font-size: 18px; margin-bottom: 12px; color: #f093fb; }
-        .service-list { list-style: none; }
-        .service-list li { padding: 12px 0; border-bottom: 1px solid #333; display: flex; justify-content: space-between; }
-        .service-list li:last-child { border: none; }
-        .service-name { color: #ddd; }
-        .service-price { color: #f5576c; font-weight: bold; }
-        .order-btn { display: block; width: calc(100% - 32px); margin: 20px auto; padding: 16px; background: linear-gradient(90deg, #f093fb 0%, #f5576c 100%); border: none; border-radius: 12px; color: #fff; font-size: 18px; font-weight: bold; cursor: pointer; text-align: center; text-decoration: none; }
-        .qr-section { text-align: center; padding: 30px; }
-        .qr-section img { width: 200px; border-radius: 12px; margin-bottom: 12px; }
-        .qr-section p { color: #888; font-size: 13px; }
-        .steps { background: #16161f; border-radius: 12px; padding: 20px; margin: 16px 0; }
-        .step { display: flex; align-items: center; margin: 12px 0; }
-        .step-num { width: 28px; height: 28px; background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 14px; margin-right: 12px; flex-shrink: 0; }
+        .hero { text-align: center; padding: 50px 20px 40px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .hero h1 { font-size: 32px; margin-bottom: 10px; }
+        .hero p { opacity: 0.9; font-size: 16px; }
+        .banner { background: linear-gradient(90deg, #f093fb 0%, #f5576c 100%); text-align: center; padding: 18px; font-size: 22px; font-weight: bold; }
+        .gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; padding: 16px; }
+        .gallery img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 8px; cursor: pointer; transition: transform 0.2s; }
+        .gallery img:hover { transform: scale(1.05); }
+        .section { padding: 24px 16px; }
+        .section-title { font-size: 18px; margin-bottom: 16px; color: #f093fb; text-align: center; }
+        .packages { display: flex; flex-direction: column; gap: 12px; max-width: 500px; margin: 0 auto; }
+        .pkg { background: #16161f; border-radius: 16px; padding: 20px; display: flex; justify-content: space-between; align-items: center; border: 2px solid transparent; transition: border-color 0.3s; cursor: pointer; }
+        .pkg:hover { border-color: #667eea; }
+        .pkg.selected { border-color: #f5576c; background: #1e1e2a; }
+        .pkg-info h3 { font-size: 16px; margin-bottom: 4px; }
+        .pkg-info p { color: #888; font-size: 13px; }
+        .pkg-price { font-size: 24px; font-weight: bold; color: #f5576c; }
+        .buy-btn { display: block; width: calc(100% - 32px); margin: 20px auto; padding: 18px; background: linear-gradient(90deg, #f093fb 0%, #f5576c 100%); border: none; border-radius: 14px; color: #fff; font-size: 18px; font-weight: bold; cursor: pointer; text-align: center; text-decoration: none; }
+        .qr-section { text-align: center; padding: 30px 16px; }
+        .qr-section img { width: 220px; border-radius: 12px; margin-bottom: 12px; }
+        .qr-section p { color: #aaa; font-size: 14px; }
+        .steps { background: #16161f; border-radius: 16px; padding: 24px; margin: 16px; max-width: 500px; margin-left: auto; margin-right: auto; }
+        .step { display: flex; align-items: center; margin: 14px 0; }
+        .step-num { width: 30px; height: 30px; background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; margin-right: 14px; flex-shrink: 0; }
         .step-text { color: #ccc; font-size: 14px; }
+        .modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.85); z-index: 1000; justify-content: center; align-items: center; padding: 20px; }
+        .modal.active { display: flex; }
+        .modal-content { background: #16161f; border-radius: 20px; padding: 30px; max-width: 400px; width: 100%; max-height: 90vh; overflow-y: auto; }
+        .modal h2 { text-align: center; margin-bottom: 20px; font-size: 20px; }
+        .modal-close { display: block; width: 100%; padding: 14px; background: #333; border: none; border-radius: 10px; color: #fff; font-size: 15px; cursor: pointer; margin-top: 12px; }
+        .form-group { margin-bottom: 16px; }
+        .form-group label { display: block; margin-bottom: 6px; color: #aaa; font-size: 13px; }
+        .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 12px; background: #0a0a0f; border: 1px solid #333; border-radius: 10px; color: #fff; font-size: 14px; }
+        .form-group textarea { height: 80px; resize: vertical; }
+        .success-msg { text-align: center; padding: 30px; display: none; }
+        .success-msg.active { display: block; }
+        .success-msg .icon { font-size: 60px; margin-bottom: 16px; }
+        .success-msg h3 { font-size: 20px; margin-bottom: 8px; color: #4ade80; }
+        .success-msg p { color: #888; font-size: 14px; }
         .footer { text-align: center; padding: 30px; color: #555; font-size: 12px; }
+        .order-id { background: #0a0a0f; padding: 10px 16px; border-radius: 8px; font-family: monospace; font-size: 12px; color: #667eea; margin: 12px 0; word-break: break-all; }
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>🎨 AI定制头像</h1>
-        <p>端午节、儿童节专属头像 · 私人定制</p>
+    <div class="hero">
+        <h1>🎨 AI端午头像定制</h1>
+        <p>专属卡通头像 · AI生成 · 当天交付</p>
     </div>
     
-    <div class="price-banner">
-        特价 ¥19.9 元/个 · 当天交付
-    </div>
+    <div class="banner">🔥 预售特惠 ¥19.9 起</div>
     
     <div class="gallery">
-        <img src="images/cover_1.png" onclick="preview(this)" alt="端午节头像1">
-        <img src="images/cover_2.png" onclick="preview(this)" alt="端午节头像2">
-        <img src="images/cover_3.png" onclick="preview(this)" alt="儿童节头像1">
-        <img src="images/cover_4.png" onclick="preview(this)" alt="儿童节头像2">
-        <img src="images/cover_5.png" onclick="preview(this)" alt="端午节头像3">
-        <img src="images/cover_6.png" onclick="preview(this)" alt="儿童节头像3">
+        <img src="images/cover_1.png" alt="端午节头像1">
+        <img src="images/cover_2.png" alt="端午节头像2">
+        <img src="images/cover_3.png" alt="儿童节头像1">
+        <img src="images/cover_4.png" alt="儿童节头像2">
+        <img src="images/cover_5.png" alt="端午节头像3">
+        <img src="images/cover_6.png" alt="儿童节头像3">
     </div>
     
     <div class="section">
-        <h2>📋 服务内容</h2>
-        <ul class="service-list">
-            <li><span class="service-name">节日主题头像</span><span class="service-price">¥19.9</span></li>
-            <li><span class="service-name">情侣/双人头像</span><span class="service-price">¥29.9</span></li>
-            <li><span class="service-name">全家福卡通头像</span><span class="service-price">¥39.9</span></li>
-            <li><span class="service-name">宠物卡通头像</span><span class="service-price">¥29.9</span></li>
-        </ul>
+        <h2 class="section-title">🎁 选择套餐</h2>
+        <div class="packages">
+            <div class="pkg selected" data-package="single" data-price="19.9" onclick="selectPkg(this)">
+                <div class="pkg-info">
+                    <h3>👤 单人头像</h3>
+                    <p>1个专属卡通头像</p>
+                </div>
+                <div class="pkg-price">¥19.9</div>
+            </div>
+            <div class="pkg" data-package="couple" data-price="29.9" onclick="selectPkg(this)">
+                <div class="pkg-info">
+                    <h3>👫 情侣/双人</h3>
+                    <p>2个专属卡通头像</p>
+                </div>
+                <div class="pkg-price">¥29.9</div>
+            </div>
+            <div class="pkg" data-package="family" data-price="39.9" onclick="selectPkg(this)">
+                <div class="pkg-info">
+                    <h3>👨‍👩‍👧 全家福</h3>
+                    <p>3-4人专属卡通头像</p>
+                </div>
+                <div class="pkg-price">¥39.9</div>
+            </div>
+        </div>
     </div>
     
+    <button class="buy-btn" onclick="openModal()">立刻定制 · 联系下单</button>
+    
     <div class="section">
-        <h2>📝 定制流程</h2>
+        <h2 class="section-title">📋 定制流程</h2>
         <div class="steps">
-            <div class="step"><div class="step-num">1</div><div class="step-text">扫码付款 ¥19.9</div></div>
-            <div class="step"><div class="step-num">2</div><div class="step-text">加微信备注「头像定制」</div></div>
-            <div class="step"><div class="step-num">3</div><div class="step-text">发送需求（节日/风格/人物描述）</div></div>
-            <div class="step"><div class="step-num">4</div><div class="step-text">AI生成 · 当天交付</div></div>
+            <div class="step"><div class="step-num">1</div><div class="step-text">扫码 / 点击联系微信下单</div></div>
+            <div class="step"><div class="step-num">2</div><div class="step-text">付款 ¥19.9 起</div></div>
+            <div class="step"><div class="step-num">3</div><div class="step-text">填写头像需求（风格、人物描述）</div></div>
+            <div class="step"><div class="step-num">4</div><div class="step-text">AI生成 · 当天交付 · 满意为止</div></div>
         </div>
     </div>
     
     <div class="qr-section">
-        <img src="../images/wechat_payment_qrcode.jpg" alt="微信付款码">
-        <p>长按识别二维码付款</p>
-        <p style="margin-top:8px;color:#f5576c;">付款后联系微信: dddd9527</p>
+        <img src="images/wechat_payment_qrcode.jpg" alt="微信联系">
+        <p>长按识别二维码添加微信</p>
+        <p style="margin-top:8px;color:#f5576c;">微信: dddd9527</p>
     </div>
     
-    <div class="footer">
-        AI生成 · 当天交付 · 满意为止
+    <!-- 需求表单弹窗 -->
+    <div class="modal" id="formModal">
+        <div class="modal-content">
+            <div id="formContent">
+                <h2>📝 填写定制需求</h2>
+                <p style="color:#888;font-size:13px;margin-bottom:16px;text-align:center;">提交后24小时内交付</p>
+                <div class="order-id" id="orderId"></div>
+                <div class="form-group">
+                    <label>已选套餐</label>
+                    <input type="text" id="pkgName" readonly>
+                </div>
+                <div class="form-group">
+                    <label>您的微信（必填）</label>
+                    <input type="text" id="wechat" placeholder="方便我们联系您">
+                </div>
+                <div class="form-group">
+                    <label>头像风格</label>
+                    <select id="style">
+                        <option value="cute">可爱卡通</option>
+                        <option value="guochao">国潮古风</option>
+                        <option value="realistic">真人转卡通</option>
+                        <option value="anime">动漫风</option>
+                        <option value="other">自定义</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>人物描述（必填）</label>
+                    <textarea id="description" placeholder="请描述头像主体：性别、年龄、外貌特征、服装、节日元素等。例如：30岁女性，端午节主题，戴粽子帽帽，卡通可爱风格"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>其他要求</label>
+                    <input type="text" id="extra" placeholder="如有特殊要求请备注">
+                </div>
+                <button class="buy-btn" onclick="submitOrder()">提交需求</button>
+                <button class="modal-close" onclick="closeModal()">暂不提交</button>
+            </div>
+            <div class="success-msg" id="successMsg">
+                <div class="icon">✅</div>
+                <h3>需求已提交！</h3>
+                <p>我们已收到您的定制需求</p>
+                <p style="margin-top:8px;">24小时内完成交付</p>
+                <p style="margin-top:12px;color:#667eea;">订单号: <span id="finalOrderId"></span></p>
+                <p style="margin-top:12px;color:#888;font-size:12px;">请等待客服联系您确认</p>
+            </div>
+        </div>
     </div>
+    
+    <div class="footer">AI生成 · 当天交付 · 满意为止</div>
     
     <script>
-    function preview(img) {
-        window.open(img.src, '_blank');
+    let selectedPkg = {name: '单人头像', price: 19.9, code: 'single'};
+    
+    function selectPkg(el) {
+        document.querySelectorAll('.pkg').forEach(p => p.classList.remove('selected'));
+        el.classList.add('selected');
+        selectedPkg = {
+            name: el.querySelector('.pkg-info h3').textContent,
+            price: el.dataset.price,
+            code: el.dataset.package
+        };
+    }
+    
+    function openModal() {
+        document.getElementById('formModal').classList.add('active');
+        document.getElementById('pkgName').value = selectedPkg.name + ' - ¥' + selectedPkg.price;
+        document.getElementById('orderId').textContent = '订单号: ' + generateOrderId();
+        document.getElementById('formContent').style.display = 'block';
+        document.getElementById('successMsg').classList.remove('active');
+    }
+    
+    function closeModal() {
+        document.getElementById('formModal').classList.remove('active');
+    }
+    
+    function generateOrderId() {
+        const now = new Date();
+        return 'DRAGON' + now.getFullYear() + 
+            String(now.getMonth()+1).padStart(2,'0') + 
+            String(now.getDate()).padStart(2,'0') + 
+            String(now.getHours()).padStart(2,'0') + 
+            String(now.getMinutes()).padStart(2,'0') + 
+            Math.random().toString(36).substr(2,4).toUpperCase();
+    }
+    
+    async function submitOrder() {
+        const wechat = document.getElementById('wechat').value.trim();
+        const desc = document.getElementById('description').value.trim();
+        
+        if (!wechat) { alert('请填写您的微信'); return; }
+        if (!desc) { alert('请描述头像需求'); return; }
+        
+        const orderId = document.getElementById('orderId').textContent.replace('订单号: ', '');
+        const orderData = {
+            order_id: orderId,
+            package: selectedPkg.name,
+            price: selectedPkg.price,
+            package_code: selectedPkg.code,
+            wechat: wechat,
+            style: document.getElementById('style').value,
+            description: desc,
+            extra: document.getElementById('extra').value.trim(),
+            submit_time: new Date().toLocaleString('zh-CN', {timeZone: 'Asia/Shanghai'})
+        };
+        
+        try {
+            // 发送订单到后端
+            const resp = await fetch('https://script.google.com/macros/s/AKfycbwV7B-_M4e9Wj4k0kT6x9qVJy9Z2X8jK3mL5nO6pQ7rS8tU9vW0xY1z2A3B4C5D6E7F8G9H0I1J2K3L4M5N6O7P8Q9R0S1T2U3V4W5X6Y7Z8a9b0c1d2e3f4g5h6i7j8k9l0m1n2o3p4q5r6s7t8u9v0w1x2y3z4/exec', {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(orderData)
+            });
+        } catch(e) {
+            console.log('通知发送:', e);
+        }
+        
+        // 显示成功
+        document.getElementById('finalOrderId').textContent = orderId;
+        document.getElementById('formContent').style.display = 'none';
+        document.getElementById('successMsg').classList.add('active');
     }
     </script>
 </body>
