@@ -93,7 +93,7 @@
         </div>
     </div>
     
-    <button class="buy-btn" onclick="openModal()">立刻定制 · 联系下单</button>
+    <a class="buy-btn" href="weixin://">📱 添加客服微信：dddd9527</a>
     
     <div class="section">
         <h2 class="section-title">📋 定制流程</h2>
@@ -111,52 +111,7 @@
         <p style="margin-top:8px;color:#f5576c;">微信: dddd9527</p>
     </div>
     
-    <!-- 需求表单弹窗 -->
-    <div class="modal" id="formModal">
-        <div class="modal-content">
-            <div id="formContent">
-                <h2>📝 填写定制需求</h2>
-                <p style="color:#888;font-size:13px;margin-bottom:16px;text-align:center;">提交后24小时内交付</p>
-                <div class="order-id" id="orderId"></div>
-                <div class="form-group">
-                    <label>已选套餐</label>
-                    <input type="text" id="pkgName" readonly>
-                </div>
-                <div class="form-group">
-                    <label>您的微信（必填）</label>
-                    <input type="text" id="wechat" placeholder="方便我们联系您">
-                </div>
-                <div class="form-group">
-                    <label>头像风格</label>
-                    <select id="style">
-                        <option value="cute">可爱卡通</option>
-                        <option value="guochao">国潮古风</option>
-                        <option value="realistic">真人转卡通</option>
-                        <option value="anime">动漫风</option>
-                        <option value="other">自定义</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>人物描述（必填）</label>
-                    <textarea id="description" placeholder="请描述头像主体：性别、年龄、外貌特征、服装、节日元素等。例如：30岁女性，端午节主题，戴粽子帽帽，卡通可爱风格"></textarea>
-                </div>
-                <div class="form-group">
-                    <label>其他要求</label>
-                    <input type="text" id="extra" placeholder="如有特殊要求请备注">
-                </div>
-                <button class="buy-btn" onclick="submitOrder()">提交需求</button>
-                <button class="modal-close" onclick="closeModal()">暂不提交</button>
-            </div>
-            <div class="success-msg" id="successMsg">
-                <div class="icon">✅</div>
-                <h3>需求已提交！</h3>
-                <p>我们已收到您的定制需求</p>
-                <p style="margin-top:8px;">24小时内完成交付</p>
-                <p style="margin-top:12px;color:#667eea;">订单号: <span id="finalOrderId"></span></p>
-                <p style="margin-top:12px;color:#888;font-size:12px;">请等待客服联系您确认</p>
-            </div>
-        </div>
-    </div>
+
     
     <div class="footer">AI生成 · 当天交付 · 满意为止</div>
     
@@ -171,66 +126,6 @@
             price: el.dataset.price,
             code: el.dataset.package
         };
-    }
-    
-    function openModal() {
-        document.getElementById('formModal').classList.add('active');
-        document.getElementById('pkgName').value = selectedPkg.name + ' - ¥' + selectedPkg.price;
-        document.getElementById('orderId').textContent = '订单号: ' + generateOrderId();
-        document.getElementById('formContent').style.display = 'block';
-        document.getElementById('successMsg').classList.remove('active');
-    }
-    
-    function closeModal() {
-        document.getElementById('formModal').classList.remove('active');
-    }
-    
-    function generateOrderId() {
-        const now = new Date();
-        return 'DRAGON' + now.getFullYear() + 
-            String(now.getMonth()+1).padStart(2,'0') + 
-            String(now.getDate()).padStart(2,'0') + 
-            String(now.getHours()).padStart(2,'0') + 
-            String(now.getMinutes()).padStart(2,'0') + 
-            Math.random().toString(36).substr(2,4).toUpperCase();
-    }
-    
-    async function submitOrder() {
-        const wechat = document.getElementById('wechat').value.trim();
-        const desc = document.getElementById('description').value.trim();
-        
-        if (!wechat) { alert('请填写您的微信'); return; }
-        if (!desc) { alert('请描述头像需求'); return; }
-        
-        const orderId = document.getElementById('orderId').textContent.replace('订单号: ', '');
-        const orderData = {
-            order_id: orderId,
-            package: selectedPkg.name,
-            price: selectedPkg.price,
-            package_code: selectedPkg.code,
-            wechat: wechat,
-            style: document.getElementById('style').value,
-            description: desc,
-            extra: document.getElementById('extra').value.trim(),
-            submit_time: new Date().toLocaleString('zh-CN', {timeZone: 'Asia/Shanghai'})
-        };
-        
-        try {
-            // 发送订单到后端
-            const resp = await fetch('https://script.google.com/macros/s/AKfycbwV7B-_M4e9Wj4k0kT6x9qVJy9Z2X8jK3mL5nO6pQ7rS8tU9vW0xY1z2A3B4C5D6E7F8G9H0I1J2K3L4M5N6O7P8Q9R0S1T2U3V4W5X6Y7Z8a9b0c1d2e3f4g5h6i7j8k9l0m1n2o3p4q5r6s7t8u9v0w1x2y3z4/exec', {
-                method: 'POST',
-                mode: 'no-cors',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify(orderData)
-            });
-        } catch(e) {
-            console.log('通知发送:', e);
-        }
-        
-        // 显示成功
-        document.getElementById('finalOrderId').textContent = orderId;
-        document.getElementById('formContent').style.display = 'none';
-        document.getElementById('successMsg').classList.add('active');
     }
     </script>
 </body>
