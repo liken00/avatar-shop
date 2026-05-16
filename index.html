@@ -198,24 +198,29 @@
     function renderContact() {
         const t = i18n[lang];
         const section = document.getElementById('contactSection');
-        const contacts = lang === 'zh' 
-            ? [t.contact.wechat, t.contact.feishu, t.contact.xianyu]
-            : [t.contact.wechat, t.contact.fiverr];
         
-        const qrcodes = {
-            wechat: 'images/wechat_payment_qrcode.jpg',
-            feishu: 'images/feishu_group_qrcode.png',
-            xianyu: 'images/xianyu_qrcode.png',
-            fiverr: 'https://fiverr.com'
-        };
-        
-        section.innerHTML = contacts.map(c => `
-            <div class="contact-card">
-                <div class="icon">${c === t.contact.wechat ? '💬' : c === t.contact.feishu ? '📱' : c === t.contact.xianyu ? '🛒' : '🌐'}</div>
-                <h3>${c.title}</h3>
-                <p>${c.sub}</p>
-            </div>
-        `).join('');
+        if (lang === 'zh') {
+            // 中文：显示微信二维码
+            section.innerHTML = `
+                <div class="contact-card" style="border: 2px solid #667eea;">
+                    <div class="icon">💬</div>
+                    <h3>微信联系</h3>
+                    <p>长按识别二维码添加</p>
+                    <img class="qr" src="wechat_qr.jpg" alt="微信二维码" style="width:200px;border-radius:8px;margin-top:12px;border: 1px solid #333;">
+                    <p style="margin-top:10px;color:#f5576c;font-weight:bold;">备注：头像定制</p>
+                </div>
+            `;
+        } else {
+            // 英文：显示Fiverr链接
+            section.innerHTML = `
+                <div class="contact-card" onclick="window.open('https://www.fiverr.com', '_blank')" style="border: 2px solid #667eea;">
+                    <div class="icon">🌐</div>
+                    <h3>Fiverr Service</h3>
+                    <p>Order custom avatars on Fiverr</p>
+                    <p style="margin-top:10px;color:#667eea;font-weight:bold;">$2.99 - Same Day Delivery →</p>
+                </div>
+            `;
+        }
     }
     
     function renderSteps() {
@@ -242,10 +247,16 @@
         const tabs = document.querySelectorAll('.tab');
         const tabKeys = ['all', 'festival', 'children', 'couple', 'family', 'pet'];
         tabs.forEach((tab, i) => tab.textContent = i18n[l].tabs[tabKeys[i]]);
-        // Update floating button
-        if (l === 'en') {
-            document.getElementById('floatingBtn').href = 'https://fiverr.com';
-        }
+        // Floating button: open WeChat in Chinese, Fiverr in English
+    const floatingBtn = document.getElementById('floatingBtn');
+    if (lang === 'zh') {
+        floatingBtn.href = 'weixin://';
+        floatingBtn.title = '联系客服';
+    } else {
+        floatingBtn.href = 'https://www.fiverr.com';
+        floatingBtn.title = 'Order on Fiverr';
+        floatingBtn.target = '_blank';
+    }
         renderGallery();
         renderPackages();
         renderContact();
